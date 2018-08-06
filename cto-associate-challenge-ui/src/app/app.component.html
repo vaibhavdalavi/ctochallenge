@@ -1,15 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:left">
-  <h1>
+<div style="text-align:center">
+  <h2>
     Welcome to {{ title }}!
-  </h1>
+  </h2>
 </div>
-
-<div>  
-  <nav>
-    <a routerLink="/login">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a routerLink="/register" >Register</a>
-  </nav>
+<!-- main app container -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+              <app-alert></app-alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
 </div>
-
-<router-outlet></router-outlet>

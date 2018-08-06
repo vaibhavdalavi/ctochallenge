@@ -9,8 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ImportResource;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -21,14 +22,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-@EnableConfigurationProperties
-public class CtoassociateApplication {
+@ImportResource("applicationContext.xml")
+public class CtoassociateApplication implements WebMvcConfigurer {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(CtoassociateApplication.class);
+	private static final Logger logger = LoggerFactory.getLogger(CtoassociateApplication.class);
 
-	private static final Set<String> DEFAULT_PRODUCES_CONSUMES = new HashSet<>(
-			Arrays.asList("application/json"));
+	private static final Set<String> DEFAULT_PRODUCES_CONSUMES = new HashSet<>(Arrays.asList("application/json"));
 
 	public static void main(String[] args) {
 		SpringApplication.run(CtoassociateApplication.class, args);
@@ -40,7 +39,7 @@ public class CtoassociateApplication {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors
-						.basePackage("com.ctoassociate")).build()
+						.basePackage("com.ctoassociate.controller")).build()
 				.apiInfo(metaData()).produces(DEFAULT_PRODUCES_CONSUMES)
 				.consumes(DEFAULT_PRODUCES_CONSUMES);
 	}
@@ -52,4 +51,6 @@ public class CtoassociateApplication {
 				"Ness Licence URL", new ArrayList<>());
 		return apiInfo;
 	}
+	
+	
 }
